@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blood Donation Platform</title>
   <link rel="stylesheet" href="styles.css">
@@ -15,6 +16,7 @@
     <!-- Login/Signup -->
     <div id="auth-section">
       <input type="email" id="email" placeholder="Email">
+
       <input type="password" id="password" placeholder="Password">
       <button onclick="signUp()">Sign Up</button>
       <button onclick="login()">Login</button>
@@ -50,13 +52,15 @@
   </div>
 
   
-  <script src="script.js" type="module">
+  <script type="module" src="/src/scripts/firebase.js"></script>
+  <script type="module" src="/src/scripts/auth.js"></script>
+  <script>
     if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js")
     .then(() => console.log("Service Worker Registered!"))
     .catch((err) => console.error("Service Worker Error:", err));
 }
 
-  </script>
+</script>
 </body>
 </html>
