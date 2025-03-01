@@ -6,10 +6,13 @@ import {
     signInWithEmailAndPassword, 
     signOut, 
     onAuthStateChanged 
-} from 'firebase/auth';
-import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
-
-// Exported functions for SPA page initialization
+} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+import { 
+    collection, 
+    addDoc, 
+    setDoc, 
+    doc 
+} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 export function initLogin() {
     const form = document.getElementById('login-form');
     if (!form) return;
@@ -27,7 +30,7 @@ export function initLogin() {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             console.log("Logged in:", auth.currentUser.email);
-            loadPage('profile_basic'); // Redirect to profile setup
+            loadPage('profile_basic');
         } catch (error) {
             console.error("Login error:", error.message);
             alert(error.message);
@@ -52,13 +55,11 @@ export function initSignUp() {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-
             await setDoc(doc(db, "users", user.uid), {
                 email: user.email,
                 createdAt: new Date()
             });
-
-            console.log("User signed up and stored in Firestore:", user.email);
+            console.log("User signed up:", user.email);
             alert("Signup successful!");
             loadPage('profile_basic');
         } catch (error) {
@@ -113,10 +114,9 @@ export function initBloodRequest() {
                 hospital: hospital,
                 timestamp: new Date()
             });
-
             console.log("Blood request submitted");
             alert("Blood request submitted successfully!");
-            loadPage('dashboard'); // Redirect after submission
+            loadPage('dashboard');
         } catch (error) {
             console.error("Request error:", error.message);
             alert(error.message);
@@ -124,5 +124,4 @@ export function initBloodRequest() {
     });
 }
 
-// Export auth state listener for app.js to handle navigation
 export { onAuthStateChanged };

@@ -139,3 +139,21 @@ button:hover, .login-btn:hover {
   text-decoration: none;
   font-weight: bold;
 }
+/* /src/styles/global.css */
+nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+nav a {
+  color: #8B0000;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+nav a:hover {
+  color: #e74c3c;
+}
