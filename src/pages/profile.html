@@ -1,0 +1,35 @@
+<!-- /src/pages/profile_basic.html -->
+<div class="container">
+    <div class="header">
+        <div class="back-arrow" data-page="login">←</div>
+        <span class="skip" data-page="dashboard">Skip</span>
+    </div>
+    <h2>Profile Setup</h2>
+    <p class="subtitle">It's optional. You can fill it out later. Go to the next step by clicking the Skip button.</p>
+    <div class="profile-icon">
+        <img src="../assets/images/user-icon.png" alt="User Icon">
+    </div>
+    <h3>Basic Information</h3>
+    <form id="profile-basic-form">
+        <label>Date of Birth</label>
+        <div class="date-input">
+            <input type="date" id="dob" onchange="calculateAge()">
+            <span id="age-text">Your age - 0</span>
+        </div>
+        <label>Gender</label>
+        <select required>
+            <option>Select gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+        <label>I want to donate blood</label>
+        <select required>
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+        <label>About Yourself</label>
+        <textarea placeholder="Type about yourself"></textarea>
+        <button type="submit" data-page="profile_personal">Next</button>
+    </form>
+</div>

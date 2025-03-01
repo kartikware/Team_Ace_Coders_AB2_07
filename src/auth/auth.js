@@ -1,130 +1,128 @@
+// /src/auth/auth.js
 // @ts-nocheck
-import { auth, db } from "./firebase.js";
+import { auth, db } from '../scripts/firebase.js';
 import { 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
     signOut, 
     onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+} from 'firebase/auth';
+import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
 
-import { collection, addDoc, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+// Exported functions for SPA page initialization
+export function initLogin() {
+    const form = document.getElementById('login-form');
+    if (!form) return;
 
-// Handle auth state changes
-onAuthStateChanged(auth, (user) => {
-    const authSection = document.getElementById("auth-section");
-    const requestForm = document.getElementById("request-form");
-    const userStatus = document.getElementById("user-status");
-    const logoutBtn = document.getElementById("logout");
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = form.querySelector('input[type="email"]').value;
+        const password = form.querySelector('input[type="password"]').value;
 
-    if (user) {
-        userStatus.textContent = `Logged in as: ${user.email}`;
-        authSection.style.display = "none";
-        requestForm.style.display = "block";
-        logoutBtn.style.display = "block";
-    } else {
-        userStatus.textContent = "Please log in or sign up.";
-        authSection.style.display = "block";
-        requestForm.style.display = "none";
-        logoutBtn.style.display = "none";
-    }
-});
+        if (!email || !password) {
+            alert("Please enter email and password");
+            return;
+        }
 
-// Sign Up Funcn
-window.signUp = async function () 
-{
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            console.log("Logged in:", auth.currentUser.email);
+            loadPage('profile_basic'); // Redirect to profile setup
+        } catch (error) {
+            console.error("Login error:", error.message);
+            alert(error.message);
+        }
+    });
+}
 
-    if (!email || !password) {
-        alert("Please enter email and password");
-        return;
-    }
+export function initSignUp() {
+    const form = document.getElementById('signup-form');
+    if (!form) return;
 
-    try 
-    {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = form.querySelector('input[type="email"]').value;
+        const password = form.querySelector('input[type="password"]').value;
 
-        // Store user data in Firestore
-        await setDoc(doc(db, "users", user.uid), {
-            email: user.email,
-            createdAt: new Date()
-        });
+        if (!email || !password) {
+            alert("Please enter email and password");
+            return;
+        }
 
-        console.log("User signed up and stored in Firestore:", user.email);
-        alert("Signup successful!");
-    } catch (error) 
-    {
-        console.error("Signup error:", error.message);
-        alert(error.message);
-    }
-};
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-// Login Funcn
-window.login = async function ()
- {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+            await setDoc(doc(db, "users", user.uid), {
+                email: user.email,
+                createdAt: new Date()
+            });
 
-    if (!email || !password)
-         {
-        alert("Please enter email and password");
-        return;
-    }
+            console.log("User signed up and stored in Firestore:", user.email);
+            alert("Signup successful!");
+            loadPage('profile_basic');
+        } catch (error) {
+            console.error("Signup error:", error.message);
+            alert(error.message);
+        }
+    });
+}
 
-    try
-     {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log("Logged in:", userCredential.user.email);
-    } catch (error) {
-        console.error("Login error:", error.message);
-        alert(error.message);
-    }
-};
+export function initLogout() {
+    const logoutBtn = document.getElementById('logout-btn');
+    if (!logoutBtn) return;
 
-// Logout Funcn
-window.logout = async function () {
-    try {
-        await signOut(auth);
-        console.log("User logged out");
-    } catch (error) {
-        console.error("Logout error:", error.message);
-        alert(error.message);
-    }
-};
+    logoutBtn.addEventListener('click', async () => {
+        try {
+            await signOut(auth);
+            console.log("User logged out");
+            loadPage('login');
+        } catch (error) {
+            console.error("Logout error:", error.message);
+            alert(error.message);
+        }
+    });
+}
 
-// Blood Request 
-window.submitRequest = async function ()
- {
-    const bloodType = document.getElementById("blood-type").value;
-    const hospital = document.getElementById("hospital").value;
-    const user = auth.currentUser;
+export function initBloodRequest() {
+    const form = document.getElementById('request-form');
+    if (!form) return;
 
-    if (!user) {
-        alert("Please log in to submit a request");
-        return;
-    }
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const bloodType = form.querySelector('#blood-type').value;
+        const hospital = form.querySelector('#hospital').value;
+        const user = auth.currentUser;
 
-    if (!bloodType || !hospital) {
-        alert("Please fill in all fields");
-        return;
-    }
+        if (!user) {
+            alert("Please log in to submit a request");
+            loadPage('login');
+            return;
+        }
 
-    try {
-        await addDoc(collection(db, "requests"), {
-            userId: user.uid,
-            email: user.email,
-            bloodType: bloodType,
-            hospital: hospital,
-            timestamp: new Date()
-        });
+        if (!bloodType || !hospital) {
+            alert("Please fill in all fields");
+            return;
+        }
 
-        console.log("Blood request submitted");
-        alert("Blood request submitted successfully!");
-    } catch (error)
-     {
-        console.error("Request error:", error.message);
-        alert(error.message);
-    }
-};
+        try {
+            await addDoc(collection(db, "requests"), {
+                userId: user.uid,
+                email: user.email,
+                bloodType: bloodType,
+                hospital: hospital,
+                timestamp: new Date()
+            });
 
+            console.log("Blood request submitted");
+            alert("Blood request submitted successfully!");
+            loadPage('dashboard'); // Redirect after submission
+        } catch (error) {
+            console.error("Request error:", error.message);
+            alert(error.message);
+        }
+    });
+}
+
+// Export auth state listener for app.js to handle navigation
+export { onAuthStateChanged };

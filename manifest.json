@@ -1,21 +1,21 @@
 {
-  "name": "Blood Donation Platform",
-  "short_name": "BloodDonate",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ff0000",
-  "description": "A PWA for blood donation requests and donors.",
-  "icons": [
-    {
-      "src": "assets/icons/icon-192x192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "assets/icons/icon-512x512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ]
+    "name": "Blood Finder",
+    "short_name": "BloodFinder",
+    "description": "A platform to connect blood donors and recipients.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f8f8f8",
+    "theme_color": "#8B0000",
+    "icons": [
+        {
+            "src": "/assets/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
 }

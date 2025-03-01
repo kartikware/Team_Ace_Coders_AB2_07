@@ -1,0 +1,141 @@
+@media (max-width: 600px) {
+  .container {
+      width: 90%;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.container, .login-container {
+  background: #fff;
+  padding: 20px 30px;
+  width: 350px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.back-arrow {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.skip {
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+h2 {
+  color: #8B0000; /* From login.css */
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.profile-icon img, .logo {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #444;
+}
+
+form {
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+textarea {
+  height: 60px;
+  resize: none;
+}
+
+.date-input {
+  position: relative;
+}
+
+.age-text {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #666;
+}
+
+.forgot-password {
+  display: block;
+  text-align: right;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #8B0000;
+  text-decoration: none;
+}
+
+button, .login-btn {
+  width: 100%;
+  padding: 10px;
+  background: #e74c3c; /* Unified red */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover, .login-btn:hover {
+  background: #d63031;
+}
+
+.signup-text {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.signup-text a {
+  color: #8B0000;
+  text-decoration: none;
+  font-weight: bold;
+}

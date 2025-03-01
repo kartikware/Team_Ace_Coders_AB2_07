@@ -1,0 +1,42 @@
+<!-- /src/pages/profile_personal.html -->
+<div class="container">
+    <div class="back-arrow" data-page="profile_basic">←</div>
+    <h2>Profile Setup</h2>
+    <p class="subtitle">Almost done :) To set your profile, fill up the form below.</p>
+    <div class="profile-icon">
+        <img src="../assets/images/user_icon.webp" alt="User Icon">
+    </div>
+    <h3>Personal Information</h3>
+    <form id="profile-personal-form">
+        <label>Your Name</label>
+        <input type="text" placeholder="Enter your name" required>
+        <label>Mobile Number</label>
+        <input type="text" placeholder="Enter your mobile number" required>
+        <label>Select Group</label>
+        <select required>
+            <option>B+</option>
+            <option>A+</option>
+            <option>O+</option>
+            <option>AB+</option>
+            <option>B-</option>
+            <option>A-</option>
+            <option>O-</option>
+            <option>AB-</option>
+        </select>
+        <label>Country</label>
+        <select required>
+            <option>Bangladesh</option>
+            <option>India</option>
+            <option>USA</option>
+            <option>UK</option>
+        </select>
+        <label>City</label>
+        <select required>
+            <option>Dhaka</option>
+            <option>Chittagong</option>
+            <option>Mumbai</option>
+            <option>New York</option>
+        </select>
+        <button type="submit" data-page="dashboard">Next</button>
+    </form>
+</div>

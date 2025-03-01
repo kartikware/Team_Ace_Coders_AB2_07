@@ -1,66 +1,31 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blood Donation Platform</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.json">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Finder</title>
+    <link rel="stylesheet" href="/src/styles/global.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="preconnect" href="https://firebase.googleapis.com">
 </head>
 <body>
-  <div class="container">
-    <h1>Blood Donation Platform</h1>
-    
-    <!-- Login/Signup -->
-    <div id="auth-section">
-      <input type="email" id="email" placeholder="Email">
-
-      <input type="password" id="password" placeholder="Password">
-      <button onclick="signUp()">Sign Up</button>
-      <button onclick="login()">Login</button>
-      <button onclick="logout()" id="logout" style="display:none;">Logout</button>
-      <p id="user-status"></p>
-    </div>
-
-    <!-- Blood Request Form (Hidden  -->
-    <div id="request-form" style="display:none;">
-      <h2>Request Blood</h2>
-      <select id="blood-type">
-        <option value="A+">A+</option>
-        <option value="A-">A-</option>
-        <option value="B+">B+</option>
-        <option value="B-">B-</option>
-        <option value="AB+">AB+</option>
-        <option value="AB-">AB-</option>
-        <option value="O+">O+</option>
-        <option value="O-">O-</option>
-      </select>
-      <input type="text" id="hospital" placeholder="Hospital Location">
-      <button onclick="submitRequest()">Submit Request</button>
-    </div>
-
-    <!-- just trials donars -->
-    <div id="donor-list">
-      <h2>Available Donors (Mock)</h2>
-      <ul id="donors">
-        <li>John Doe - A+ (2 km away)</li>
-        <li>Jane Smith - O- (5 km away)</li>
-      </ul>
-    </div>
-  </div>
-
-  
-  <script type="module" src="/src/scripts/firebase.js"></script>
-  <script type="module" src="/src/scripts/auth.js"></script>
-  <script>
-    if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js")
-    .then(() => console.log("Service Worker Registered!"))
-    .catch((err) => console.error("Service Worker Error:", err));
-}
-
-</script>
+    <nav>
+        <a href="#" data-page="login">Login</a>
+        <a href="#" data-page="signup">Sign Up</a>
+        <a href="#" data-page="profile_basic">Profile Setup (Basic)</a>
+        <a href="#" data-page="profile_personal">Profile Setup (Personal)</a>
+        <a href="#" data-page="requests">Blood Request</a>
+        <a href="#" data-page="logout" id="logout-btn">Logout</a>
+    </nav>
+    <div id="content"></div>
+    <script type="module" src="/src/scripts/firebase.js"></script>
+    <script type="module" src="/src/auth/auth.js"></script>
+    <script type="module" src="/src/scripts/utils.js"></script>
+    <script type="module" src="/src/scripts/app.js"></script>
+    <script type="module">
+        import { registerServiceWorker } from '/src/scripts/utils.js';
+        registerServiceWorker();
+    </script>
 </body>
 </html>
