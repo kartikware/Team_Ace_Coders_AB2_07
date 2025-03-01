@@ -1,0 +1,21 @@
+{
+  "name": "Blood Donation Platform",
+  "short_name": "BloodDonate",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff0000",
+  "description": "A PWA for blood donation requests and donors.",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
