@@ -1,19 +1,17 @@
 // /src/scripts/app.js
-import { auth } from '../scripts/firebase.js'; // Add this import
+import { auth } from '../scripts/firebase.js'; // Ensure this path is correct
 import { onAuthStateChanged, initLogin, initSignUp, initLogout, initBloodRequest } from '../auth/auth.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const content = document.getElementById('content');
     console.log('App.js loaded, DOM ready');
 
-    // Handle auth state changes
     onAuthStateChanged(auth, (user) => {
         console.log('Auth state changed:', user ? user.email : 'No user');
         if (user) loadPage('dashboard');
         else loadPage('login');
     });
 
-    // Navigation event listener
     document.addEventListener('click', (e) => {
         const page = e.target.getAttribute('data-page');
         if (page) {
@@ -23,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Global page loader
     window.loadPage = async function(page) {
         console.log('Attempting to load page:', page);
         try {
