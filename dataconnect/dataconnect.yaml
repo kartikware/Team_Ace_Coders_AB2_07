@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "blood-donation-platform"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "blood-donation-platform-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
