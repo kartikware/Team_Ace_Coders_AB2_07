@@ -19,7 +19,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// 🔹 Handle authentication state changes
+// Handle auth
 onAuthStateChanged(auth, (user) => {
     const authSection = document.getElementById("auth-section");
     const requestForm = document.getElementById("request-form");
@@ -39,7 +39,7 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// 🔹 Sign Up Function
+//  Sign Up Funcn
 window.signUp = async function () {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -53,7 +53,7 @@ window.signUp = async function () {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // 🔹 Store user data in Firestore
+        // Store user data in fb
         await setDoc(doc(db, "users", user.uid), {
             email: user.email,
             createdAt: new Date()
@@ -67,7 +67,7 @@ window.signUp = async function () {
     }
 };
 
-// 🔹 Login Function
+//  Login Funcn
 window.login = async function () {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -86,7 +86,7 @@ window.login = async function () {
     }
 };
 
-// 🔹 Logout Function
+// Logout Funcn
 window.logout = async function () {
     try {
         await signOut(auth);
@@ -97,7 +97,7 @@ window.logout = async function () {
     }
 };
 
-// 🔹 Blood Request Submission
+// blood request
 window.submitRequest = async function () {
     const bloodType = document.getElementById("blood-type").value;
     const hospital = document.getElementById("hospital").value;
